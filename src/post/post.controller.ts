@@ -7,7 +7,6 @@ import {
   Patch,
   Delete,
   ParseUUIDPipe,
-  Get,
 } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 import { PostService } from './post.service';
@@ -35,21 +34,21 @@ export class PostController {
     return { posts };
   }
 
-  @Get(':id')
-  getPost(@Param('id') id): string {
-    const { postId } = param;
-    const postId = await prisma.post.findUnique({
-      where: {
-        id: Number(req.params.id),
-      },
-      // relationのときはinclude使用して取得
+  // @Get(':id')
+  // getPost(@Param('id') id): string {
+  //   const { postId } = param;
+  //   const postId = await prisma.post.findUnique({
+  //     where: {
+  //       id: Number(req.params.id),
+  //     },
+  //     // relationのときはinclude使用して取得
 
-      include: {
-        category: true,
-      },
-    });
-    return postId;
-  }
+  //     include: {
+  //       category: true,
+  //     },
+  //   });
+  //   return postId;
+  // }
 }
 
 // @Controller('post')
