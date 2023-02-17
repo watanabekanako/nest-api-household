@@ -41,7 +41,7 @@ export class PostController {
       where: {
         id: Number(id),
       },
-      // relationのときはinclude使用して
+      // relationのときはinclude使用して取得
       include: {
         category: true,
       },
