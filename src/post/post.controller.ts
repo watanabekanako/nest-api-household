@@ -20,13 +20,3 @@ export class PostController {
     return postId;
   }
 }
-
-// @Controller('post')
-// export class PostController {
-//   constructor(private postService: PostService) {}
-//   // 利用する Service が inject される
-//   @Get()
-//   async findMany(): Promise<> {
-//     return this.postService.findMany();
-//   }
-// }
