@@ -34,29 +34,18 @@ export class PostController {
     return { posts };
   }
 
-  // @Get(':id')
-  // getPost(@Param('id') id): string {
-  //   const { postId } = param;
-  //   const postId = await prisma.post.findUnique({
-  //     where: {
-  //       id: Number(req.params.id),
-  //     },
-  //     // relationのときはinclude使用して取得
-
-  //     include: {
-  //       category: true,
-  //     },
-  //   });
-  //   return postId;
-  // }
+  @Get(':id')
+  async getPost(@Param('id') id: number) {
+    // const { postId } = param;
+    const postId = await prisma.post.findUnique({
+      where: {
+        id: Number(id),
+      },
+      // relationのときはinclude使用して
+      include: {
+        category: true,
+      },
+    });
+    return { postId };
+  }
 }
-
-// @Controller('post')
-// export class PostController {
-//   constructor(private postService: PostService) {}
-//   // 利用する Service が inject される
-//   @Get()
-//   async findMany(): Promise<> {
-//     return this.postService.findMany();
-//   }
-// }
