@@ -1,5 +1,13 @@
-import { Controller, Get } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+} from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
+import { PostService } from './post.service';
 
 // const prisma = new PrismaClient();
 // @Controller('post')
@@ -30,3 +38,32 @@ import { PrismaClient } from '@prisma/client';
 //     return this.postService.findMany();
 //   }
 // }
+
+@Controller('post')
+export class PostController {
+  constructor(private readonly postService: PostService) {}
+
+  @Post()
+  createPost(
+    @Body('title') title: string,
+    @Body('content') content: string,
+    @Body('categoryId') categoryId: number,
+  ): any {
+    return this.postService.createPost(title, content, categoryId);
+  }
+
+  @Get()
+  getAllPost(): Promise<any> {
+    return this.postService.getPost();
+  }
+
+  @Get('find')
+  getPostCategory(@Body('content') content: string): any {
+    return this.postService.getPostOne(content);
+  }
+
+  @Get(':id')
+  getPost(@Param('id', ParseIntPipe) id: number): Promise<any> {
+    return this.postService.getPostById(id);
+  }
+}
