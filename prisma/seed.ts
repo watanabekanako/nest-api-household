@@ -10,7 +10,20 @@ for (let i = 0; i < 100; i++) {
 
 async function main() {
   // カテゴリの作成
-  const [category1, category2, category3, category4] = await Promise.all([
+  const [
+    category1,
+    category2,
+    category3,
+    category4,
+    category5,
+    category6,
+    category7,
+    category8,
+    category9,
+    category10,
+    category11,
+    category12,
+  ] = await Promise.all([
     prisma.category.create({
       data: {
         name: '食費',
