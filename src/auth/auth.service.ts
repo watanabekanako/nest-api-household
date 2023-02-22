@@ -1,5 +1,10 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
+import { LoginDto } from './dto/login.dto';
 
 @Injectable()
 export class AuthService {
@@ -9,16 +14,16 @@ export class AuthService {
     this.prisma = new PrismaClient();
   }
 
-  async login(email: string, name: string): Promise<any> {
-    const loginItem = await this.prisma.user.findUnique({
+  async login(loginDto: LoginDto): Promise<any> {
+    const login = await this.prisma.user.findUnique({
       where: {
-        email,
+        email: loginDto.email,
       },
     });
-    if (!loginItem) throw new NotFoundException();
-    const validName = name === loginItem.name;
-    //エラーステータスorメッセージを変えた方が良い？
-    if (loginItem && !validName) throw new NotFoundException();
-    return loginItem;
+    if (!login) throw new NotFoundException();
+    const validName = loginDto.name === login.name;
+    //適切なexception-filtersに変更？
+    if (login && !validName) throw new BadRequestException();
+    return login;
   }
 }

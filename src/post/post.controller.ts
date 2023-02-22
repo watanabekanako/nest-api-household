@@ -1,12 +1,15 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
+  Patch,
   Post,
 } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
+import { CreatePostDto } from './dto/create-post.dto';
 import { PostService } from './post.service';
 
 // const prisma = new PrismaClient();
@@ -44,12 +47,8 @@ export class PostController {
   constructor(private readonly postService: PostService) {}
 
   @Post()
-  createPost(
-    @Body('title') title: string,
-    @Body('content') content: string,
-    @Body('categoryId') categoryId: number,
-  ): any {
-    return this.postService.createPost(title, content, categoryId);
+  createPost(@Body() createPostDto: CreatePostDto): any {
+    return this.postService.createPost(createPostDto);
   }
 
   @Get()
@@ -57,13 +56,31 @@ export class PostController {
     return this.postService.getPost();
   }
 
-  @Get('find')
-  getPostCategory(@Body('content') content: string): any {
-    return this.postService.getPostOne(content);
+  @Get(':id')
+  getCategoryPost(@Param('id', ParseIntPipe) categoryId: number): Promise<any> {
+    return this.postService.getCategoryPost(categoryId);
   }
 
-  @Get(':id')
-  getPost(@Param('id', ParseIntPipe) id: number): Promise<any> {
-    return this.postService.getPostById(id);
+  // @Get('find')
+  // getPostCategory(@Body('content') content: string): any {
+  //   return this.postService.getPostOne(content);
+  // }
+
+  // @Get(':id')
+  // getPost(@Param('id', ParseIntPipe) id: number): Promise<any> {
+  //   return this.postService.getPostById(id);
+  // }
+
+  // @Delete(':id')
+  // deletePost(@Param('id', ParseIntPipe) id: number): any {
+  //   return this.postService.deletePost(id);
+  // }
+
+  @Patch(':id')
+  updatePost(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() createPostDto: CreatePostDto,
+  ): any {
+    return this.postService.updatePost(id, createPostDto);
   }
 }

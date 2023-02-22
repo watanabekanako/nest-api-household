@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
+import { CreatePostDto } from './dto/create-post.dto';
 
 @Injectable()
 export class PostService {
@@ -9,16 +10,11 @@ export class PostService {
     this.prisma = new PrismaClient();
   }
 
-  async createPost(
-    title: string,
-    content: string,
-    categoryId: number,
-  ): Promise<any> {
+  async createPost(createPostDto: CreatePostDto): Promise<any> {
+    const postItem: any = { ...createPostDto };
     const post = await this.prisma.post.create({
       data: {
-        title,
-        content,
-        categoryId,
+        ...postItem,
       },
     });
     return post;
@@ -46,6 +42,35 @@ export class PostService {
         title: {
           contains: content,
         },
+      },
+    });
+  }
+
+  getCategoryPost(categoryId: number): Promise<any> {
+    return this.prisma.post.findMany({
+      where: {
+        categoryId,
+      },
+    });
+  }
+
+  async updatePost(id: number, createPostDto: CreatePostDto): Promise<any> {
+    const updateItem: any = { ...createPostDto };
+    const update = await this.prisma.post.update({
+      where: {
+        id,
+      },
+      data: {
+        ...updateItem,
+      },
+    });
+    return update;
+  }
+
+  deletePost(id: number) {
+    return this.prisma.post.delete({
+      where: {
+        id,
       },
     });
   }
