@@ -20,7 +20,6 @@ model User {
 model Post {
   id           Int           @id @default(autoincrement())
   content      String?
-  logoImg String?
   author       User?         @relation(fields: [authorId], references: [id])
   authorId     Int?
   category     Category      @relation(fields: [categoryId], references: [id],onDelete: Cascade)
@@ -33,5 +32,6 @@ model Post {
 model Category {
   id    Int    @id @default(autoincrement())
   name  String
+  logoImg String?
   posts Post[]
 }
