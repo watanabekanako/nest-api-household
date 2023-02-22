@@ -10,7 +10,20 @@ for (let i = 0; i < 100; i++) {
 
 async function main() {
   // カテゴリの作成
-  const [category1, category2, category3, category4] = await Promise.all([
+  const [
+    category1,
+    category2,
+    category3,
+    category4,
+    category5,
+    category6,
+    category7,
+    category8,
+    category9,
+    category10,
+    category11,
+    category12,
+  ] = await Promise.all([
     prisma.category.create({
       data: {
         name: '食費',
@@ -82,28 +95,6 @@ async function main() {
       },
     }),
   ]);
-
-  // postの作成
-  // const [post1, post2] = await Promise.all([
-  //   prisma.post.create({
-  //     data: {
-  //       content: 'post1 content',
-  //       authorId: user1.id,
-  //       categoryId: category1.id,
-  //       createdAt: '2023-01-13',
-  //     },
-  //   }),
-
-  //   // 必須項目だけのやつ
-  //   prisma.post.create({
-  //     data: {
-  //       content: 'post2 content',
-  //       authorId: user1.id,
-  //       categoryId: category1.id,
-  //       createdAt: '2023-01-13',
-  //     },
-  //   }),
-  // ]);
 }
 
 main()
