@@ -10,7 +10,7 @@ export class UserService {
     this.prisma = new PrismaClient();
   }
 
-  //email,name,tel
+  //email,password
   async createUser(createUserDto: CreateUserDto): Promise<any> {
     const useItem: any = { ...createUserDto };
     const user = await this.prisma.user.create({

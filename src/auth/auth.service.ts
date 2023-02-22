@@ -21,7 +21,7 @@ export class AuthService {
       },
     });
     if (!login) throw new NotFoundException();
-    const validName = loginDto.name === login.name;
+    const validName = loginDto.name === login.email;
     //適切なexception-filtersに変更？
     if (login && !validName) throw new BadRequestException();
     return login;

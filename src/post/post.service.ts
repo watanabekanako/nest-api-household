@@ -35,16 +35,16 @@ export class PostService {
     });
   }
 
-  //id以外を指定してPostを取得
-  getPostOne(content: string): Promise<any> {
-    return this.prisma.post.findMany({
-      where: {
-        title: {
-          contains: content,
-        },
-      },
-    });
-  }
+  // //id以外を指定してPostを取得
+  // getPostOne(content: string): Promise<any> {
+  //   return this.prisma.post.findMany({
+  //     where: {
+  //       title: {
+  //         contains: content,
+  //       },
+  //     },
+  //   });
+  // }
 
   getCategoryPost(categoryId: number): Promise<any> {
     return this.prisma.post.findMany({
