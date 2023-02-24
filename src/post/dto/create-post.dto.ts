@@ -1,11 +1,16 @@
 import { Type } from 'class-transformer';
-import { IsDateString, IsInt, IsNotEmpty } from 'class-validator';
+import {
+  IsDateString,
+  IsInt,
+  IsNotEmpty,
+  IsPositive,
+  IsString,
+  IsUrl,
+} from 'class-validator';
 
 export class CreatePostDto {
-  @IsNotEmpty()
+  @IsString()
   content: string;
-
-  logoImg: string;
 
   @IsInt()
   @IsNotEmpty()
@@ -18,10 +23,12 @@ export class CreatePostDto {
   categoryId: number;
 
   @IsDateString()
+  @IsNotEmpty()
   createdAt: string;
 
   @IsInt()
   @IsNotEmpty()
+  @IsPositive()
   @Type(() => Number)
   price: number;
 }

@@ -32,15 +32,15 @@ export class UserController {
   //   return console.log(req.body.email);
   // }
 
-  @Get(':id')
-  getUser(@Param('id', ParseIntPipe) id: number): Promise<any> {
-    return this.userService.getUserById(id);
-  }
+  // @Get(':id')
+  // getUser(@Param('id', ParseIntPipe) id: number): Promise<any> {
+  //   return this.userService.getUserById(id);
+  // }
 
-  @Delete(':id')
-  deleteUser(@Param('id', ParseIntPipe) id: number): any {
-    return this.userService.deleteUser(id);
-  }
+  // @Delete(':id')
+  // deleteUser(@Param('id', ParseIntPipe) id: number): any {
+  //   return this.userService.deleteUser(id);
+  // }
 
   @Patch(':id')
   updateUser(
