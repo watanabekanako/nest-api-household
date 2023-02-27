@@ -8,10 +8,14 @@ import {
   Patch,
   Post,
   Req,
+  UseGuards,
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserService } from './user.service';
-
+import { AuthGuard } from '@nestjs/passport';
+import { User } from '@prisma/client';
+import { Request } from 'express';
+@UseGuards(AuthGuard('jwt'))
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -21,9 +25,13 @@ export class UserController {
     return this.userService.createUser(createUserDto);
   }
 
+  // @Get()
+  // getAllUser(): Promise<any> {
+  //   return this.userService.getUser();
+  // }
   @Get()
-  getAllUser(): Promise<any> {
-    return this.userService.getUser();
+  getLoginUser(@Req() req: Request): Omit<User, 'password'> {
+    return req.user;
   }
 
   //リクエストパラメータから受け取る場合（例）

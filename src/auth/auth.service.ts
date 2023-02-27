@@ -15,6 +15,7 @@ export class AuthService {
     private readonly config: ConfigService,
   ) {}
   async signUp(dto: LoginDto): Promise<Msg> {
+    // パスワードのハッシュ化
     const hashed = await bcrypt.hash(dto.password, 12);
     try {
       await this.prisma.user.create({
