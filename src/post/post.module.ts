@@ -3,7 +3,6 @@ import { PrismaModule } from 'src/prisma/prisma.module';
 import { PostController } from './post.controller';
 // import { PostController } from './post.controller';
 import { PostService } from './post.service';
-
 @Module({
   imports: [PrismaModule],
   controllers: [PostController],
