@@ -4,15 +4,17 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { LoginDto } from './dto/login.dto';
 
 @Injectable()
 export class AuthService {
-  private prisma: PrismaClient;
+  // private prisma: PrismaClient;
 
-  constructor() {
-    this.prisma = new PrismaClient();
-  }
+  // constructor() {
+  //   this.prisma = new PrismaClient();
+  // }
+  constructor(private prisma: PrismaService) {}
 
   async login(loginDto: LoginDto): Promise<any> {
     const login = await this.prisma.user.findUnique({
