@@ -86,15 +86,37 @@ async function main() {
     }),
   ]);
 
-  // ユーザーの作成
-  const [user1] = await Promise.all([
-    prisma.user.create({
-      data: {
-        password: '12345678',
-        email: 'user1@example.com',
-      },
-    }),
-  ]);
+  // // ユーザーの作成
+  // const [user1] = await Promise.all([
+  //   prisma.user.create({
+  //     data: {
+  //       password: '12345678',
+  //       email: 'user1@example.com',
+  //     },
+  //   }),
+  // ]);
+
+  // postの作成
+  // const [post1, post2] = await Promise.all([
+  //   prisma.post.create({
+  //     data: {
+  //       content: 'post1 content',
+  //       authorId: user1.id,
+  //       categoryId: category1.id,
+  //       createdAt: '2023-01-13',
+  //     },
+  //   }),
+
+  //   // 必須項目だけのやつ
+  //   prisma.post.create({
+  //     data: {
+  //       content: 'post2 content',
+  //       authorId: user1.id,
+  //       categoryId: category1.id,
+  //       createdAt: '2023-01-13',
+  //     },
+  //   }),
+  // ]);
 }
 
 main()
