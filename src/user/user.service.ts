@@ -5,23 +5,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { User } from '@prisma/client';
 @Injectable()
 export class UserService {
-  // private prisma: PrismaClient;
-
-  // constructor() {
-  //   this.prisma = new PrismaClient();
-  // }
   constructor(private prisma: PrismaService) {}
-
-  //email,password
-  async createUser(createUserDto: CreateUserDto): Promise<any> {
-    const useItem: any = { ...createUserDto };
-    const user = await this.prisma.user.create({
-      data: {
-        ...useItem,
-      },
-    });
-    return user;
-  }
 
   getUser() {
     return this.prisma.user.findMany({

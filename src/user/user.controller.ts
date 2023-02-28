@@ -21,15 +21,6 @@ import { Request } from 'express';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post() //email,password
-  createUser(@Body() createUserDto: CreateUserDto): any {
-    return this.userService.createUser(createUserDto);
-  }
-
-  // @Get()
-  // getAllUser(): Promise<any> {
-  //   return this.userService.getUser();
-  // }
   @Get()
   getLoginUser(@Req() req: Request): Omit<User, 'password'> {
     return req.user;
