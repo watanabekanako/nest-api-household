@@ -11,6 +11,7 @@ async function bootstrap() {
     credentials: true,
     origin: ['http://localhost:3000'],
   });
+  // フロントから受け取ったクッキーを解析
   app.use(cookieParser());
   // app.use(
   //   csurf({

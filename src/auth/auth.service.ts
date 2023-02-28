@@ -43,16 +43,20 @@ export class AuthService {
       },
     });
     if (!user) throw new ForbiddenException('Email or password incorrect');
+    // パスワードの比較
     const isValid = await bcrypt.compare(dto.password, user.password);
     if (!isValid) throw new ForbiddenException('Email or password incorrect');
+    // メールアドレスとパスワードが両方とも一致していたら以下の処理
     return this.generateJwt(user.id, user.email);
   }
 
+  // jwtを生成
   async generateJwt(userId: number, email: string): Promise<Jwt> {
     const payload = {
       sub: userId,
       email,
     };
+    // secret keyを呼び出す
     const secret = this.config.get('JWT_SECRET');
     const token = await this.jwt.signAsync(payload, {
       expiresIn: '5m',

@@ -23,13 +23,20 @@ export class UserService {
   }
 
   getUser() {
-    return this.prisma.user.findMany();
+    return this.prisma.user.findMany({
+      include: {
+        posts: true,
+      },
+    });
   }
 
   getUserById(id: number): Promise<any> {
     return this.prisma.user.findUnique({
       where: {
         id,
+      },
+      include: {
+        posts: true,
       },
     });
   }
