@@ -1,19 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaClient } from '@prisma/client';
 import { CreateUserDto } from './dto/create-user.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { User } from '@prisma/client';
 @Injectable()
 export class UserService {
-  // private prisma: PrismaClient;
-
-  // constructor() {
-  //   this.prisma = new PrismaClient();
-  // }
   constructor(private prisma: PrismaService) {}
 
   //email,password
-  async createUser(createUserDto: CreateUserDto): Promise<any> {
+  async createUser(createUserDto: CreateUserDto): Promise<User> {
     const useItem: any = { ...createUserDto };
     const user = await this.prisma.user.create({
       data: {
@@ -23,7 +17,7 @@ export class UserService {
     return user;
   }
 
-  getUser() {
+  getUser(): Promise<User[]> {
     return this.prisma.user.findMany({
       include: {
         posts: true,
@@ -31,7 +25,7 @@ export class UserService {
     });
   }
 
-  getUserById(id: number): Promise<any> {
+  getUserById(id: number): Promise<User> {
     return this.prisma.user.findUnique({
       where: {
         id,
@@ -50,8 +44,8 @@ export class UserService {
     });
   }
 
-  async updateUser(id: number, createUserDto: CreateUserDto): Promise<any> {
-    const updateItem: any = { ...createUserDto };
+  async updateUser(id: number, createUserDto: CreateUserDto): Promise<User> {
+    const updateItem = { ...createUserDto };
     const update = await this.prisma.user.update({
       where: {
         id,

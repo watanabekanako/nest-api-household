@@ -24,7 +24,10 @@ export class CreatePostDto {
 
   @IsDateString()
   @IsNotEmpty()
-  createdAt: string;
+  createdAt: Date;
+
+  @IsDateString()
+  updatedAt: Date;
 
   @IsInt()
   @IsNotEmpty()
