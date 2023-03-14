@@ -22,7 +22,7 @@ export class PostService {
   }
 
   getPostById(id: number): Promise<Posts[]> {
-    return this.prisma.post.findUnique({
+    return this.prisma.post.findMany({
       where: {
         id,
       },
