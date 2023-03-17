@@ -21,10 +21,10 @@ export class PostService {
     return this.prisma.post.findMany();
   }
 
-  getPostById(id: number): Promise<Posts[]> {
+  getPostById(authorId: number): Promise<Posts[]> {
     return this.prisma.post.findMany({
       where: {
-        id,
+        authorId,
       },
       include: {
         category: true,
