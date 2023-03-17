@@ -35,8 +35,8 @@ export class AuthController {
   ): Promise<Msg> {
     const jwt = await this.authService.login(dto);
     res.cookie('access_token', jwt.accessToken, {
-      httpOnly: true,
-      secure: true,
+      httpOnly: false,
+      secure: false,
       sameSite: 'lax',
       path: '/',
     });
@@ -50,8 +50,8 @@ export class AuthController {
   logout(@Req() req: Request, @Res({ passthrough: true }) res: Response): Msg {
     // アクセストークンを空にする
     res.cookie('access_token', '', {
-      httpOnly: true,
-      secure: true,
+      httpOnly: false,
+      secure: false,
       sameSite: 'lax',
       path: '/',
     });
