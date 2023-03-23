@@ -48,6 +48,9 @@ export class PostService {
       where: {
         categoryId,
       },
+      include: {
+        category: true,
+      },
     });
   }
 
