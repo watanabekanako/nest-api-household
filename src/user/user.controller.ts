@@ -10,7 +10,7 @@ import {
   Req,
   UseGuards,
 } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
+import { CreateUserDto, UpdateUserDto } from './dto/create-user.dto';
 import { UserService } from './user.service';
 import { AuthGuard } from '@nestjs/passport';
 import { User } from '@prisma/client';
@@ -44,7 +44,7 @@ export class UserController {
   @Patch(':id')
   updateUser(
     @Param('id', ParseIntPipe) id: number,
-    @Body() createUserDto: CreateUserDto,
+    @Body() createUserDto: UpdateUserDto,
   ): Promise<User> {
     return this.userService.updateUser(id, createUserDto);
   }
