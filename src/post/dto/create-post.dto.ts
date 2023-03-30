@@ -28,9 +28,14 @@ export class CreatePostDto {
   @IsDateString()
   updatedAt: Date;
 
-  @IsInt()
-  @IsNotEmpty()
-  @IsPositive()
+  // @IsInt()
+  // @IsNotEmpty()
+  // @IsPositive()
   @Type(() => Number)
-  price: number;
+  expence: number;
+
+  // @IsInt()
+  // @IsNotEmpty()
+  @Type(() => Number)
+  income: number;
 }
