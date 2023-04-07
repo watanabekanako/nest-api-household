@@ -27,6 +27,7 @@ export class AuthService {
         data: {
           email: dto.email,
           password: hashed,
+          name: dto.name,
         },
       });
       return {
@@ -80,5 +81,9 @@ export class AuthService {
     return {
       accessToken: token,
     };
+  }
+  // すべてのユーザーの取得
+  getAllUser(): Promise<any> {
+    return this.prisma.user.findMany();
   }
 }

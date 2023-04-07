@@ -6,6 +6,7 @@ import {
   HttpStatus,
   Res,
   Req,
+  Get,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { AuthService } from './auth.service';
@@ -15,7 +16,11 @@ import { Csrf, Msg } from './interfaces/auth.interfaces';
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
-
+  // すべてのユーザー取得
+  @Get('alluser')
+  getAllPost(): Promise<any> {
+    return this.authService.getAllUser();
+  }
   @Post('signup')
   signUp(@Body() dto: LoginDto): Promise<Msg> {
     return this.authService.signUp(dto);
