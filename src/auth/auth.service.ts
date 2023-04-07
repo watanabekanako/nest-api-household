@@ -11,7 +11,7 @@ import * as bcrypt from 'bcrypt';
 import { PrismaService } from '../prisma/prisma.service';
 import { LoginDto } from './dto/login.dto';
 import { Msg, Jwt } from './interfaces/auth.interfaces';
-
+import { SignUpDto } from './dto/signup.dto';
 @Injectable()
 export class AuthService {
   constructor(
@@ -19,7 +19,7 @@ export class AuthService {
     private readonly jwt: JwtService,
     private readonly config: ConfigService,
   ) {}
-  async signUp(dto: LoginDto): Promise<Msg> {
+  async signUp(dto: SignUpDto): Promise<Msg> {
     // パスワードのハッシュ化
     const hashed = await bcrypt.hash(dto.password, 12);
     try {
